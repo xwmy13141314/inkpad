@@ -1,0 +1,430 @@
+/* 墨签 InkPad · Apple 浅色设计语言（macOS / iOS 风格）
+   色板参照 macOS 窗口灰 + iOS 语义色，类名与旧版完全一致 */
+
+:root {
+  /* 颜色 */
+  --bg: #f5f5f7;                    /* macOS 窗口底灰 */
+  --panel: #ffffff;
+  --sidebar: #f4f4f6;               /* 侧栏浅灰（实色兜底，不依赖毛玻璃） */
+  --ink: #1d1d1f;                   /* Apple 近黑 */
+  --ink-2: #6e6e73;                 /* 次级文字 */
+  --ink-3: #8e8e93;                 /* 三级文字 */
+  --line: #e5e5ea;                  /* iOS 分隔线 */
+  --line-soft: rgba(0, 0, 0, .07);  /* 发丝线（顶栏 / 卡片描边） */
+  --fill: #f2f2f7;                  /* iOS systemGray6：输入底 / hover 底 */
+  --accent: #007aff;                /* macOS 蓝 */
+  --accent-deep: #0066d6;
+  --accent-soft: rgba(0, 122, 255, .12);
+  --red: #ff3b30;                   /* iOS 红 */
+  --ok: #34c759;                    /* iOS 绿 */
+  /* 圆角 */
+  --radius-s: 7px;
+  --radius: 10px;
+  --radius-l: 14px;
+  /* 阴影 */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 20px rgba(0, 0, 0, .05);
+  --shadow-pop: 0 16px 48px rgba(0, 0, 0, .22);
+  /* 焦点环 */
+  --focus-ring: 0 0 0 3.5px rgba(0, 122, 255, .25);
+  /* 下拉箭头（灰色 chevron，focus 态复用） */
+  --chevron: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' stroke='%238e8e93' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat right 9px center;
+}
+
+* { box-sizing: border-box; }
+
+/* 全局细滚动条（覆盖侧栏 / 表单 / 预览 / 日志所有滚动区） */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, .16); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, .28); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 13px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 原生控件跟随强调色（勾选框 / 滑块变蓝） */
+input[type="checkbox"], input[type="radio"], input[type="range"] { accent-color: var(--accent); }
+
+/* ── 顶栏 ─────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, .85);
+  backdrop-filter: saturate(180%) blur(20px);
+  flex: 0 0 auto;
+}
+
+.brand { display: flex; align-items: center; gap: 9px; }
+.mark { width: 11px; height: 11px; background: var(--accent); border-radius: 3px; }
+.name { font-size: 15px; font-weight: 600; letter-spacing: 3px; }
+
+.conn { display: flex; align-items: center; gap: 8px; }
+
+/* 输入控件：iOS 灰底无框，聚焦变白底 + 蓝环 */
+select, input.input, textarea {
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  background: var(--fill);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+select:focus, input.input:focus, textarea:focus {
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: var(--focus-ring);
+}
+::placeholder { color: var(--ink-3); }
+
+/* 下拉：去原生外观 + 自绘 chevron */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 28px;
+  background: var(--fill) var(--chevron);
+}
+select:focus { background: #fff var(--chevron); }
+select option { color: var(--ink); }
+
+textarea { resize: vertical; width: 100%; line-height: 1.6; }
+
+.statusline { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink-2); margin-left: 4px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #c7c7cc; transition: background .2s; }
+.dot.on { background: var(--ok); }
+.dot.err { background: var(--red); }
+
+/* ── 按钮 ─────────────────────────────────────────── */
+button {
+  padding: 6px 14px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line-soft);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s, opacity .15s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+button:hover:not(:disabled) { background: var(--fill); }
+button:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+button:disabled { opacity: .4; cursor: not-allowed; }
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+button.primary:hover:not(:disabled) { background: var(--accent-deep); border-color: var(--accent-deep); }
+button.ghost { color: var(--ink-2); background: transparent; border-color: transparent; box-shadow: none; }
+button.ghost:hover:not(:disabled) { background: rgba(0, 0, 0, .05); }
+button.small { padding: 4px 10px; font-size: 12px; }
+
+/* ── 主体三栏 ─────────────────────────────────────── */
+main {
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+}
+
+/* 模板列表：浅灰侧栏 + 可滚动列表 */
+.sidebar {
+  flex: 0 0 152px;
+  border-right: 1px solid var(--line-soft);
+  background: var(--sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 4px 10px 8px;
+  overflow: hidden;
+}
+
+.side-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--ink-3);
+  padding: 0 8px 8px;
+}
+
+/* min-height:0 是 flex 子项可收缩滚动的关键 */
+.tpl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px 8px 8px 0;
+}
+
+button.tpl {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  padding: 7px 10px;
+  border-radius: var(--radius-s);
+  font-size: 13px;
+  color: var(--ink);
+}
+button.tpl:hover:not(:disabled) { background: rgba(0, 0, 0, .05); }
+button.tpl.active { background: var(--accent); color: #fff; font-weight: 500; }
+button.tpl.active:hover:not(:disabled) { background: var(--accent); }
+
+.side-foot {
+  border-top: 1px solid var(--line-soft);
+  padding: 10px 8px 0 0;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dev-info { font-size: 11px; color: var(--ink-3); line-height: 1.5; padding-left: 2px; }
+
+/* 预览 */
+.preview-pane {
+  flex: 0 0 432px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line-soft);
+  overflow: auto;
+}
+
+.preview-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.preview-box img { width: 100%; height: 100%; display: block; object-fit: contain; image-rendering: pixelated; }
+
+.preview-mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, .88);
+  color: var(--ink-3);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.preview-mask.hide { display: none; }
+
+.meta-line { font-size: 11px; color: var(--ink-3); margin-top: 8px; letter-spacing: .5px; }
+
+button.push {
+  margin-top: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+}
+button.push:hover:not(:disabled) { background: var(--accent-deep); border-color: var(--accent-deep); }
+
+/* 表单：iOS 设置页式分组卡 */
+.form-pane {
+  flex: 1 1 auto;
+  padding: 18px 22px;
+  overflow: auto;
+  min-width: 0;
+}
+
+.form-pane h2 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.card {
+  background: var(--panel);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-card);
+  padding: 2px 16px 8px;
+  margin-bottom: 10px;
+}
+.card-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--ink-3);
+  padding: 12px 2px 6px;
+}
+/* 卡内独占一行的说明文字（如空模板提示）：留白对称 */
+.card > .hint:only-child { margin: 9px 0 7px; }
+
+/* 字段行：分隔线式（卡内最后一行无线） */
+.field { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.field:last-child { border-bottom: none; }
+.field > label { display: block; font-size: 12px; font-weight: 500; color: var(--ink-2); margin-bottom: 6px; letter-spacing: .5px; }
+.field-hint { font-size: 11px; color: var(--ink-3); margin-top: 5px; }
+
+.check-row { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--ink); cursor: pointer; }
+.check-row input { width: 15px; height: 15px; }
+
+.range-row { display: flex; align-items: center; gap: 10px; }
+.range-row input[type="range"] { flex: 1; }
+.range-val { font-size: 12px; color: var(--ink-3); width: 28px; text-align: right; }
+
+.photo-row { display: flex; align-items: center; gap: 10px; }
+.photo-path {
+  flex: 1;
+  font-size: 12px;
+  color: var(--ink-2);
+  background: var(--fill);
+  border-radius: var(--radius-s);
+  padding: 6px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── 待办列表编辑器 ───────────────────────────────── */
+.todo-ed { display: flex; flex-direction: column; gap: 6px; }
+.todo-row { display: flex; align-items: center; gap: 7px; }
+.todo-row .grip { cursor: grab; color: var(--ink-3); user-select: none; font-size: 14px; padding: 0 1px; }
+.todo-row input[type="text"] { flex: 1; padding: 5px 10px; box-shadow: none; }
+.todo-row input[type="checkbox"] { width: 14px; height: 14px; flex: 0 0 auto; }
+.todo-row.done input[type="text"] { text-decoration: line-through; color: var(--ink-3); }
+.todo-row.dragging { opacity: .45; }
+.todo-row.drop-before { box-shadow: 0 -2px 0 var(--accent); }
+.todo-row.drop-after { box-shadow: 0 2px 0 var(--accent); }
+button.tbtn { padding: 2px 8px; font-size: 13px; color: var(--ink-3); border: none; background: transparent; box-shadow: none; }
+button.tbtn:hover:not(:disabled) { background: rgba(0, 0, 0, .05); color: var(--ink); }
+button.tbtn.flag.on { color: var(--red); font-weight: 700; }
+button.todo-add { align-self: flex-start; border-style: dashed; box-shadow: none; }
+
+.hint { font-size: 12px; color: var(--ink-3); line-height: 1.7; margin: 10px 0 0; }
+.hint b { color: var(--ink-2); }
+
+/* ── 抽屉（WiFi / 调试） ─────────────────────────── */
+.debug-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .32);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+.debug-panel.hide { display: none; }
+
+.debug-inner {
+  width: 560px;
+  max-height: 82vh;
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: var(--shadow-pop);
+  animation: modal-in .18s ease-out;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(1.04); }
+}
+
+.debug-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.debug-head h3 { margin: 0; font-size: 14px; font-weight: 600; color: var(--ink); }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+button.action { padding: 13px 10px; font-size: 14px; }
+#btnRed { color: var(--red); }
+
+.row { display: flex; gap: 8px; align-items: center; }
+.row.gap-top { margin-top: 12px; }
+.row.calib { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.row.calib label { font-size: 12px; color: var(--ink-2); }
+.row.calib select { flex: 1; }
+
+.loghead { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 6px; }
+.loghead h3 { margin: 0; font-size: 12px; letter-spacing: 1.5px; color: var(--ink-3); }
+
+.log {
+  margin: 0;
+  height: 200px;
+  overflow: auto;
+  background: var(--fill);
+  border-radius: var(--radius-s);
+  padding: 10px 12px;
+  font: 12px/1.65 ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ── 通路切换：macOS 胶囊分段 ─────────────────────── */
+.seg {
+  display: flex;
+  background: rgba(118, 118, 128, .18);
+  border-radius: 9px;
+  padding: 2px;
+}
+.seg-btn {
+  border: none;
+  border-radius: 7px;
+  padding: 4px 14px;
+  font-size: 12px;
+  color: var(--ink-2);
+  background: transparent;
+  box-shadow: none;
+}
+.seg-btn + .seg-btn { border-left: none; }
+.seg-btn.active {
+  background: #fff;
+  color: var(--ink);
+  font-weight: 500;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .18), 0 0 0 .5px rgba(0, 0, 0, .04);
+}
+.seg-btn:hover:not(.disabled) { background: rgba(0, 0, 0, .05); }
+.seg-btn.active:hover:not(.disabled) { background: #fff; }
+
+/* ── WiFi 面板 ────────────────────────────────────── */
+.wifi-status {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+  background: var(--fill);
+  border-radius: var(--radius-s);
+  padding: 7px 10px;
+  min-height: 32px;
+}
+
+.wifi-log {
+  margin: 12px 0 0;
+  height: 170px;
+  overflow: auto;
+  background: var(--fill);
+  border-radius: var(--radius-s);
+  padding: 10px 12px;
+  font: 12px/1.65 ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  word-break: break-all;
+}

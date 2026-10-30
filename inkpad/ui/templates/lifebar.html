@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 20px 26px 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 9px;
+    border-bottom: 2px solid #000;
+  }
+  .title { font-size: 21px; font-weight: 700; letter-spacing: 3px; }
+  .day-no { font-size: 13px; letter-spacing: 1px; }
+
+  .mid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 11px;
+  }
+  .pct-row { display: flex; align-items: baseline; justify-content: center; gap: 6px; }
+  .pct {
+    font-size: 92px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #d02020;
+    font-variant-numeric: tabular-nums;
+  }
+  .pct-unit { font-size: 28px; font-weight: 700; color: #d02020; }
+
+  .bar { height: 14px; border: 2px solid #000; border-radius: 7px; overflow: hidden; }
+  .bar .fill { height: 100%; background: #d02020; border-radius: 5px; }
+
+  .years {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .years .now {
+    color: #d02020;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .nums {
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+  .nums b { font-size: 19px; font-variant-numeric: tabular-nums; }
+  .nums .sub { font-size: 13px; }
+
+  .foot {
+    border-top: 1px dashed #000;
+    padding-top: 7px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  /* 未填生日时的占位 */
+  .empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #000;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+  {{content}}
+</body>
+</html>

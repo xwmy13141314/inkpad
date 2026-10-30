@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>墨签 InkPad</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark"></span>
+    <span class="name">墨签</span>
+  </div>
+
+  <div class="conn">
+    <div class="seg" id="transportSeg">
+      <button class="seg-btn active" data-t="usb">USB</button>
+      <button class="seg-btn" data-t="wifi">WiFi</button>
+    </div>
+    <select id="portSelect">
+      <option value="">— 串口 —</option>
+    </select>
+    <button id="btnRefresh" class="ghost small">刷新</button>
+    <button id="btnConnect" class="primary small">连接</button>
+    <span class="statusline">
+      <span id="statusDot" class="dot"></span>
+      <span id="statusText">未连接</span>
+    </span>
+  </div>
+</header>
+
+<main>
+  <!-- 模板列表 -->
+  <aside class="sidebar">
+    <div class="side-title">模板</div>
+    <div id="tplList" class="tpl-list"></div>
+    <div class="side-foot">
+      <div id="devInfo" class="dev-info">未连接设备</div>
+      <button id="btnWifi" class="ghost small">WiFi 设置</button>
+      <button id="btnDebug" class="ghost small">调试</button>
+    </div>
+  </aside>
+
+  <!-- 预览 -->
+  <section class="preview-pane">
+    <div class="preview-box">
+      <img id="preview" alt="预览" />
+      <div id="previewMask" class="preview-mask">渲染中…</div>
+    </div>
+    <div id="renderMeta" class="meta-line"></div>
+    <button id="btnPush" class="push">推送到屏幕</button>
+    <p class="hint">预览是<b>量化后</b>的画面，与屏上一致。</p>
+  </section>
+
+  <!-- 表单 -->
+  <section class="form-pane">
+    <h2 id="formTitle">内容</h2>
+    <div id="formBody" class="form-body"></div>
+  </section>
+</main>
+
+<!-- WiFi 抽屉 -->
+<div id="wifiPanel" class="debug-panel hide">
+  <div class="debug-inner">
+    <div class="debug-head">
+      <h3>WiFi 副通路</h3>
+      <button id="btnWifiClose" class="ghost small">关闭</button>
+    </div>
+    <p class="hint">
+      屏不插电脑也能推图。设备会在局域网里广播自己（mDNS / UDP 探测）；
+      找不到时用「配置模式」让屏自己开热点，电脑连上它的热点即可（IP 固定 192.168.4.1）。
+    </p>
+
+    <div class="row gap-top">
+      <input id="wifiIp" class="input" placeholder="设备 IP，例如 192.168.4.1" />
+      <button id="btnDiscover" class="ghost">自动发现</button>
+      <button id="btnWifiPing" class="ghost">测试</button>
+    </div>
+    <div id="wifiStatus" class="wifi-status">未发现设备</div>
+
+    <div class="row calib">
+      <button id="btnApMode" class="ghost">配置模式（屏开热点）</button>
+      <button id="btnScanWifi" class="ghost">扫描周围网络</button>
+    </div>
+    <pre id="wifiLog" class="wifi-log"></pre>
+  </div>
+</div>
+
+<!-- 调试抽屉 -->
+<div id="debugPanel" class="debug-panel hide">
+  <div class="debug-inner">
+    <div class="debug-head">
+      <h3>调试</h3>
+      <button id="btnDebugClose" class="ghost small">关闭</button>
+    </div>
+    <div class="grid">
+      <button id="btnTest" class="action">四段测试图</button>
+      <button id="btnWhite" class="action">全白</button>
+      <button id="btnBlack" class="action">全黑</button>
+      <button id="btnRed" class="action">全红</button>
+    </div>
+    <div class="row calib">
+      <label for="calSelect">极性</label>
+      <select id="calSelect">
+        <option value="0">0 · B直 / R直</option>
+        <option value="2" selected>2 · B直 / R反（默认）</option>
+        <option value="1">1 · B反 / R直</option>
+        <option value="3">3 · B反 / R反</option>
+      </select>
+      <button id="btnCal" class="ghost">写入</button>
+    </div>
+    <div class="loghead">
+      <h3>日志</h3>
+      <button id="btnClearLog" class="ghost small">清空</button>
+    </div>
+    <pre id="log" class="log"></pre>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

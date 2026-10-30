@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 12px 14px 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 8px;
+  }
+  .title { font-size: 26px; font-weight: 800; letter-spacing: 2px; line-height: 1; }
+  .meta { text-align: right; color: #d02020; font-size: 11px; font-weight: 700; line-height: 1.55; letter-spacing: 1px; }
+
+  /* 星期表头：黑底反白，周末红底 */
+  .bar { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .bar .h {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 0;
+  }
+  .bar .h.we { background: #d02020; }
+
+  /* 日期网格：无边框，数字上 + 农历小字下 */
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    margin-top: 4px;
+    min-height: 0;
+  }
+  .cell { text-align: center; padding-top: 3px; overflow: hidden; }
+  .cell .d { font-size: 17px; font-weight: 700; line-height: 1.15; font-variant-numeric: tabular-nums; }
+  .cell .s { font-size: 9px; line-height: 1.35; }
+  .cell .s.red { color: #d02020; font-weight: 700; }
+  .cell.we .d { color: #d02020; }
+
+  /* 今天：红色实心圆 + 白字 */
+  .cell.today .d {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    background: #d02020;
+    color: #fff;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="title">{{title}}</div>
+    <div class="meta">{{meta1}}<br>{{meta2}}</div>
+  </div>
+
+  <div class="bar">{{headCells}}</div>
+  <div class="grid">{{cells}}</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 18px 22px 14px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .city {
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #000;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .left { display: flex; flex-direction: column; }
+
+  .temp {
+    font-size: 96px;
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -4px;
+    color: #d02020;
+    font-variant-numeric: tabular-nums;
+  }
+  .temp .unit { font-size: 40px; font-weight: 500; letter-spacing: 0; }
+
+  .cond { font-size: 22px; letter-spacing: 2px; margin-top: 4px; }
+
+  .right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .row { font-size: 14px; letter-spacing: 1px; }
+  .row .k { font-size: 12px; letter-spacing: 2px; }
+  .hi { color: #d02020; font-weight: 700; }
+
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px dashed #000;
+    padding-top: 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .stale { color: #d02020; }
+</style>
+</head>
+<body>
+  <div class="city">{{city}}</div>
+
+  <div class="main">
+    <div class="left">
+      <div class="temp">{{temp}}<span class="unit">°</span></div>
+      <div class="cond">{{cond}}</div>
+    </div>
+    <div class="right">
+      <div class="row"><span class="k">最高</span> <span class="hi">{{hi}}°</span></div>
+      <div class="row"><span class="k">最低</span> {{lo}}°</div>
+      <div class="row"><span class="k">体感</span> {{feels}}°</div>
+      <div class="row"><span class="k">风力</span> {{windText}}</div>
+      <div class="row"><span class="k">湿度</span> {{humidity}}%</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div>{{updated}}</div>
+    <div class="{{staleClass}}">{{stale}}</div>
+  </div>
+</body>
+</html>

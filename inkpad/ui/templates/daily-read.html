@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── 顶栏 ─────────────────────────────────── */
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 16px 7px 18px;
+    border-bottom: 1px solid #000;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+  .top .t { display: flex; align-items: center; gap: 8px; }
+  .top .right { display: flex; align-items: center; gap: 12px; }
+  .temp { display: flex; align-items: center; gap: 5px; }
+  .batt { display: flex; align-items: center; gap: 5px; }
+  .batt .shell {
+    width: 26px; height: 12px; border: 1.5px solid #000; border-radius: 2px;
+    position: relative; padding: 1.5px;
+  }
+  .batt .shell::after {
+    content: ""; position: absolute; right: -4px; top: 3px;
+    width: 2.5px; height: 5px; background: #000;
+  }
+  .batt .fill { display: block; height: 100%; background: #000; }
+  .batt.low .fill { background: #d02020; }
+
+  /* ── 主体 ─────────────────────────────────── */
+  .body {
+    flex: 1;
+    display: flex;
+    gap: 14px;
+    padding: 12px 18px 8px 18px;
+    min-height: 0;
+  }
+
+  .col-left {
+    flex: 0 0 118px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px dashed #000;
+    padding-right: 12px;
+  }
+
+  .year { font-size: 14px; letter-spacing: 2px; }
+  .day {
+    font-size: 84px; font-weight: 800; line-height: 1;
+    letter-spacing: -4px; font-variant-numeric: tabular-nums;
+    color: #d02020;
+  }
+  .month { font-size: 20px; letter-spacing: 4px; margin-top: 2px; }
+  .week { font-size: 15px; letter-spacing: 3px; margin-top: 2px; }
+  .weekend { color: #d02020; }
+
+  .bar {
+    width: 88px; height: 7px; border: 1px solid #000;
+    padding: 1px; margin-top: 10px;
+  }
+  .bar .fill { height: 100%; background: #d02020; }
+
+  .season {
+    font-size: 12px; line-height: 1.6; text-align: center;
+    margin-top: 8px; letter-spacing: 0.5px;
+  }
+
+  .col-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .quote {
+    font-size: 15px; line-height: 1.75; letter-spacing: 0.5px;
+    text-align: justify;
+  }
+  .from {
+    text-align: right; font-size: 13px; letter-spacing: 1px;
+    margin-top: 8px;
+  }
+  .book {
+    margin-top: 8px; padding-top: 8px; border-top: 1px dashed #000;
+    font-size: 12px; line-height: 1.7; letter-spacing: 0.5px;
+  }
+  .book .bt { font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+  .book .bd { margin-top: 2px; opacity: .8; }
+  .book .bn { margin-top: 4px; }
+
+  /* ── 底栏 ─────────────────────────────────── */
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 18px;
+    border-top: 1px solid #000;
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="t">
+      <span>{{ampm}}</span>
+      <span>{{md}}</span>
+      <span>{{weekday}}</span>
+    </div>
+    <div class="right">
+      {{weather}}
+      {{battery}}
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="col-left">
+      <div class="year">{{year}}</div>
+      <div class="day">{{day}}</div>
+      <div class="month">{{month}}</div>
+      <div class="week {{weekdayClass}}">{{weekdayShort}}</div>
+      <div class="bar"><div class="fill" style="width:{{progress}}%"></div></div>
+      <div class="season">{{season}}</div>
+    </div>
+
+    <div class="col-right">
+      <div class="quote">{{quote}}</div>
+      <div class="from">{{from}}</div>
+      <div class="book">
+        <div class="bt">{{bookTitle}}</div>
+        <div class="bd">{{bookAuthor}}</div>
+        <div class="bn">{{bookNote}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div>{{footLeft}}</div>
+    <div>{{footRight}}</div>
+  </div>
+</body>
+</html>

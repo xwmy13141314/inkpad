@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+  body {
+    background: #fff; color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 20px 26px 16px 24px;
+    display: flex; flex-direction: column;
+  }
+  .head { text-align: center; padding-bottom: 8px; }
+  /* 标题下的居中短红线——InkSight 卡片式分隔 */
+  .head::after {
+    content: ""; display: block;
+    width: 60px; height: 2px;
+    background: #d02020;
+    margin: 8px auto 0;
+  }
+  .t { font-size: {{titleSize}}px; font-weight: 700; letter-spacing: {{titleSpacing}}px; white-space: nowrap; }
+  .a { font-size: 13px; letter-spacing: 2px; margin-top: 4px; }
+  .body {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: {{fontSize}}px; line-height: {{lineHeight}}; letter-spacing: {{spacing}}px;
+    text-align: center;
+    padding: 6px 0;
+  }
+  .body .ln { display: block; }
+  .seal {
+    align-self: flex-end; width: 26px; height: 26px;
+    border: 2px solid #d02020; color: #d02020;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; letter-spacing: 0; border-radius: 3px;
+  }
+  .foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 1px dashed #000; padding-top: 7px; font-size: 12px; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="t">{{title}}</div>
+    <div class="a">{{author}}</div>
+  </div>
+  <div class="body">{{lines}}</div>
+  <div class="foot">
+    <div>{{source}}</div>
+    <div class="seal">{{seal}}</div>
+  </div>
+</body>
+</html>

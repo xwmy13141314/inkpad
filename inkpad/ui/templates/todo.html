@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+  body {
+    background: #fff; color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 16px 22px 14px 20px;
+    display: flex; flex-direction: column;
+  }
+  .head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 8px; border-bottom: 1px solid #000;
+  }
+  .title { font-size: 20px; font-weight: 700; letter-spacing: 3px; }
+  .meta { font-size: 12px; letter-spacing: 1px; }
+  .list { flex: 1; padding-top: 10px; display: flex; flex-direction: column; gap: 9px; overflow: hidden; }
+  .item { display: flex; align-items: flex-start; gap: 9px; font-size: 15px; line-height: 1.35; }
+  .box {
+    flex: 0 0 auto; width: 12px; height: 12px;
+    border: 1.5px solid #000; margin-top: 3px;
+  }
+  .item.done .box { background: #000; }
+  .item.done .tx { text-decoration: line-through; }
+  .item.urgent .tx { color: #d02020; font-weight: 700; }
+  .tx { flex: 1; }
+  .foot {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid #000; padding-top: 7px; font-size: 12px; letter-spacing: 1px;
+  }
+  .track { flex: 1; height: 8px; border: 1px solid #000; padding: 1px; margin: 0 10px; }
+  .track .fill { height: 100%; background: #d02020; }
+  .pct { color: #d02020; font-weight: 700; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="title">{{title}}</div>
+    <div class="meta">{{meta}}</div>
+  </div>
+  <div class="list">{{items}}</div>
+  <div class="foot">
+    <div>{{doneText}}</div>
+    <div class="track"><div class="fill" style="width:{{percent}}%"></div></div>
+    <div class="pct">{{percent}}%</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 18px 24px 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #000;
+  }
+  .title { font-size: 21px; font-weight: 700; letter-spacing: 3px; }
+  .title .fish { color: #d02020; }
+  .date { font-size: 13px; letter-spacing: 1px; }
+
+  /* 主区：距最近节日 */
+  .main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 2px 8px;
+  }
+  .main .label { font-size: 20px; letter-spacing: 2px; white-space: nowrap; }
+  .main .days {
+    font-size: 74px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #d02020;
+    font-variant-numeric: tabular-nums;
+  }
+  .main .unit { font-size: 24px; font-weight: 700; align-self: flex-end; padding-bottom: 8px; }
+  .main .sub {
+    margin-left: auto;
+    text-align: right;
+    font-size: 13px;
+    line-height: 1.9;
+    letter-spacing: 1px;
+  }
+  .main .sub b { font-size: 16px; }
+
+  /* 副区：2×2 网格 */
+  .grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    margin-top: 2px;
+  }
+  .cell {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .cell .k { font-size: 13px; letter-spacing: 2px; color: #555; }
+  .cell .v { font-size: 19px; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
+  .cell .v.red { color: #d02020; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="title">摸鱼<span class="fish">日历</span></div>
+    <div class="date">{{date}} · {{weekday}}</div>
+  </div>
+  <div class="main">
+    <div class="label">距{{mainName}}</div>
+    <div class="days">{{mainDays}}</div>
+    <div class="unit">天</div>
+    <div class="sub">
+      <div>{{mainDate}}</div>
+      <div>下一个：<b>{{secondName}} {{secondDays}}天</b></div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="cell"><div class="k">距 周 末</div><div class="v">{{weekend}}</div></div>
+    <div class="cell"><div class="k">距 下 班</div><div class="v red">{{offwork}}</div></div>
+    <div class="cell"><div class="k">本月已过</div><div class="v">{{monthPct}}%</div></div>
+    <div class="cell"><div class="k">本年已过</div><div class="v">{{yearPct}}%</div></div>
+  </div>
+</body>
+</html>

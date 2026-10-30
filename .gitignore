@@ -1,0 +1,29 @@
+# ── 不属于本仓库的本地目录（其他项目/参考素材）──
+/desktop/
+/inksight/
+/inksight-docs/
+/epd42_test/
+/epd42_weather/
+
+# ── 内部工作文档（不上传）──
+/HANDOVER.md
+/PLAN-inkpad.md
+
+# ── 桌面端：依赖与产物 ──
+inkpad/node_modules/
+inkpad/dist/
+inkpad/build/
+inkpad/out/
+inkpad/.refs/
+
+# ── 桌面端：Electron 用户数据（含个人内容与 API Key，绝不入库）──
+inkpad/.userdata/
+inkpad/.userdata-ui/
+
+# ── 固件：PlatformIO 编译产物 ──
+firmware_usb/.pio/
+
+# ── 通用 ──
+.DS_Store
+Thumbs.db
+*.log

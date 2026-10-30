@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+  body {
+    background: #fff; color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 18px 24px 16px 22px;
+    display: flex; flex-direction: column;
+  }
+  .head { display: flex; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid #d02020; }
+  .md { font-size: 13px; letter-spacing: 2px; color: #d02020; font-weight: 700; }
+  .t { font-size: 24px; font-weight: 700; letter-spacing: 2px; }
+  .d { flex: 1; font-size: 15px; line-height: 1.85; letter-spacing: 0.5px; margin-top: 12px; text-align: justify; }
+  .foot {
+    margin-top: auto; padding-top: 8px; border-top: 1px dashed #000;
+    display: flex; justify-content: space-between; font-size: 12px; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="md">{{md}}</div>
+    <div class="t">{{title}}</div>
+  </div>
+  <div class="d">{{desc}}</div>
+  <div class="foot">
+    <div>{{left}}</div>
+    <div>{{right}}</div>
+  </div>
+</body>
+</html>

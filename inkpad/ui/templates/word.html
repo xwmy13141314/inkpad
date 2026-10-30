@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+  body {
+    background: #fff; color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 20px 24px 16px 24px;
+    display: flex; flex-direction: column;
+  }
+  .head { display: flex; justify-content: space-between; align-items: baseline; }
+  .tag { font-size: 12px; letter-spacing: 2px; color: #d02020; font-weight: 700; }
+  .w {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    text-align: center;
+  }
+  .word {
+    font-family: Georgia, "Noto Serif SC", "SimSun", serif;
+    font-size: 46px; font-weight: 800; line-height: 1.1; letter-spacing: -1px;
+    word-break: break-all;
+  }
+  .pho {
+    font-family: Georgia, serif;
+    font-size: 15px; letter-spacing: 1px; margin-top: 8px;
+  }
+  /* 音标下的居中短红线——InkSight word_card 分隔 */
+  .pho::after {
+    content: ""; display: block;
+    width: 40px; height: 2px;
+    background: #d02020;
+    margin: 10px auto 0;
+  }
+  .mean { font-size: 17px; line-height: 1.7; margin-top: 14px; letter-spacing: 0.5px; }
+  .ex { font-size: 12px; line-height: 1.6; margin-top: 10px; opacity: .75; }
+  .foot {
+    border-top: 1px dashed #000; padding-top: 7px;
+    display: flex; justify-content: space-between; font-size: 12px; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="tag">{{tag}}</div>
+    <div class="tag">{{index}}</div>
+  </div>
+  <div class="w">
+    <div class="word">{{word}}</div>
+    <div class="pho">{{phonetic}}</div>
+    <div class="mean">{{meaning}}</div>
+    <div class="ex">{{example}}</div>
+  </div>
+  <div class="foot">
+    <div>{{left}}</div>
+    <div>{{right}}</div>
+  </div>
+</body>
+</html>

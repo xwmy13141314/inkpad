@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 400px; height: 300px; overflow: hidden; }
+  body {
+    background: #fff; color: #000;
+    font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 18px 24px 16px 24px;
+    display: flex; flex-direction: column;
+  }
+  .title { font-size: 13px; letter-spacing: 3px; color: #000; }
+  .big {
+    font-size: 96px; font-weight: 800; line-height: 1;
+    letter-spacing: -4px; margin-top: 4px;
+    color: #d02020; font-variant-numeric: tabular-nums;
+  }
+  .big .u { font-size: 34px; font-weight: 500; letter-spacing: 0; }
+  .sub { font-size: 14px; letter-spacing: 1px; margin-top: 6px; }
+  .bar { height: 14px; border: 1px solid #000; padding: 1px; margin-top: 16px; }
+  .bar .fill { height: 100%; background: #d02020; }
+  .scale {
+    display: flex; justify-content: space-between;
+    font-size: 11px; letter-spacing: 1px; margin-top: 4px;
+  }
+  .marks { flex: 1; margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .mark { display: flex; align-items: baseline; gap: 10px; font-size: 13px; }
+  .mark .d { flex: 0 0 auto; color: #d02020; font-weight: 700; white-space: nowrap; }
+  .mark .n { flex: 1; }
+  .mark .p { flex: 0 0 auto; text-align: right; }
+  .foot {
+    margin-top: 10px; padding-top: 7px; border-top: 1px dashed #000;
+    display: flex; justify-content: space-between; font-size: 12px; letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="title">{{title}}</div>
+  <div class="big">{{percent}}<span class="u">%</span></div>
+  <div class="sub">{{sub}}</div>
+  <div class="bar"><div class="fill" style="width:{{percent}}%"></div></div>
+  <div class="scale"><div>1月</div><div>4月</div><div>7月</div><div>10月</div><div>12月</div></div>
+  <div class="marks">{{marks}}</div>
+  <div class="foot">
+    <div>{{left}}</div>
+    <div>{{right}}</div>
+  </div>
+</body>
+</html>
