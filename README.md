@@ -47,3 +47,7 @@ pio run -e esp32c3-usb -t upload --upload-port COM12
 
 应用的个人数据（备忘、待办、天气位置、AI API Key 等）全部存在本机
 `%APPDATA%\inkpad\data.json`，不进仓库；AI 请求直连你自己配置的服务商。
+
+## License
+
+[MIT](LICENSE)
